@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="row ">
+        <div id="resume" class="page">
+             <nav class="nav">
+          <a class="" href="{% url 'index' %}">Home</a>
+          <a class="" href="{% url 'blog:blog' %}">Blog</a>
+          <a class="" href="#">Projects</a>
+        </nav>
+            <h3 id="name">{{ resume.name }}</h3>
+            <div id="profile">
+                {% if resume.image %}
+                    <img id="photo" src="{{ resume.image.url }}">
+                {% endif %}
+
+                <ul class="social list-inline">
+                    {% for social_media in resume.social_media.all %}
+                    <li class="list-inline-item">
+                        <a href="{{ social_media.url }}" target="_blank" rel="noopener noreferrer">
+                            <img class="logos" src="{{ social_media.logo.url }}" alt="{{ social_media.name }}">
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <p id="bio">{{ resume.bio }}</p>
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary">Download CV</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
