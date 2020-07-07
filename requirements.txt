@@ -1,7 +1,14 @@
 asgiref==3.2.3
 Django==3.0.3
 django-markdownx==3.0.1
+html5lib==1.0.1
 Markdown==3.2.1
 Pillow==7.0.0
+PyPDF2==1.26.0
 pytz==2019.3
+reportlab==3.5.42
+six==1.15.0
 sqlparse==0.3.0
+Wand==0.5.9
+webencodings==0.5.1
+xhtml2pdf==0.2.4
