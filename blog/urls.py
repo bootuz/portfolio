@@ -9,5 +9,5 @@ urlpatterns = [
     path('add-post/', views.add_post, name='add-post'),
     path('<slug:slug>/', views.post_details, name='post-details'),
     path('<slug:slug>/edit/', views.edit_post, name='edit-post'),
-
+    path('tags/<slug:slug>/', views.tags, name='tags')
 ]

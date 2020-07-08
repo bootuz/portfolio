@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from cv.models import Profile
 
 
 def index(request):
-    profile = Profile.objects.get(name__contains='Astemir Boziev')
+    profile = get_object_or_404(Profile, name='Astemir Boziev')
 
     context = {
         'profile': profile

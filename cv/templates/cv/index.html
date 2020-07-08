@@ -24,11 +24,11 @@
 <div class="container">
     <div class="row ">
         <div id="resume" class="page">
-             <nav class="nav">
-          <a class="" href="{% url 'index' %}">Home</a>
-          <a class="" href="{% url 'blog:blog' %}">Blog</a>
-{#          <a class="" href="#">Projects</a>#}
-        </nav>
+            <nav class="nav">
+                <a class="" href="{% url 'index' %}">Home</a>
+                <a class="" href="{% url 'blog:blog' %}">Blog</a>
+                {#          <a class="" href="#">Projects</a>#}
+            </nav>
             <h3 id="name">{{ profile.name }}</h3>
             <div id="profile">
                 {% if profile.image %}

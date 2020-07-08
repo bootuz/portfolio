@@ -5,11 +5,15 @@ from django.urls import reverse
 
 from blog.forms import PostForm
 from blog.models import Post
+from taggit.models import Tag
 
 
 def blog(request):
-    posts = Post.objects.all()
-
+    sort_by = request.GET.get('sort', None)
+    if sort_by is not None:
+        posts = Post.objects.all().order_by(sort_by).reverse()
+    else:
+        posts = Post.objects.all().order_by('created_on')
     context = {
         'posts': posts
     }
@@ -18,6 +22,10 @@ def blog(request):
 
 def post_details(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    if not request.session.get(str(post.id), False):
+        request.session[str(post.id)] = True
+        post.views_count += 1
+        post.save()
 
     context = {
         'post': post
@@ -33,6 +41,8 @@ def add_post(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('blog:blog'))
+        else:
+            print(form.errors)
     else:
         form = PostForm()
 
@@ -49,8 +59,6 @@ def edit_post(request, slug):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
-            # post.slug = slugify(post.title)
-            # post.save()
             return HttpResponseRedirect(post.get_absolute_url())
     else:
         form = PostForm(instance=post)
@@ -60,3 +68,14 @@ def edit_post(request, slug):
         'post': post
     }
     return render(request, 'blog/edit_post.html', context)
+
+
+def tags(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    posts = Post.objects.filter(tags=tag)
+
+    context = {
+        'tag': tag,
+        'posts': posts
+    }
+    return render(request, 'blog/tags.html', context=context)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cv',
     'blog',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Taggit settings
+TAGGIT_CASE_INSENSITIVE = True
+
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2621440 * 2
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

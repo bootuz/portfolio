@@ -34,7 +34,7 @@
                      <a class="" href="{% url 'blog:blog' %}">Blog</a>
 {#                     <a class="" href="#">Projects</a>#}
                  </span>
-              <a href="" style=" text-decoration: none;"><i class="material-icons">add</i></a>
+              <a href="{% url 'blog:add-post' %}" style=" text-decoration: none;"><i class="material-icons">add</i></a>
             </nav>
         </div>
     </div>
@@ -50,6 +50,9 @@
                             <div id="editor">
                             </div>
                         </div>
+                        <p>
+                            Tags: {{ form.tags }}
+                        </p>
                         <button id="button" class="btn btn-primary" type="submit">Submit</button>
                     </form>
                 </div>
